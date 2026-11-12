@@ -1,76 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tech OTT Downloader — YouTube &amp; Instagram Video Downloader</title>
-<meta name="description" content="Paste a YouTube or Instagram link and get direct download links. The video downloads straight from YouTube/Instagram servers.">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#09090b">
+  <meta name="description" content="Tech OTT Downloader — get direct video and audio download links for supported public videos.">
+  <title>Tech OTT Downloader — Video Downloader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
   <header class="topbar">
-    <div class="logo">TECH OTT <span>Downloader</span></div>
-    <div class="top-note">YouTube &amp; Instagram</div>
+    <a class="brand" href="#" aria-label="Tech OTT Downloader home">
+      <span class="brand-mark"><span></span><span></span><span></span></span>
+      <span class="brand-name">TECH <b>OTT</b><small>DOWNLOADER</small></span>
+    </a>
+    <div class="topbar-right">
+      <span class="availability"><i></i> Simple. Fast. Direct.</span>
+      <span class="top-divider"></span>
+      <span class="platform-label">YOUTUBE <b>·</b> INSTAGRAM</span>
+    </div>
   </header>
 
-  <main class="wrap">
+  <main class="page-shell">
     <section class="hero">
-      <h1>Download videos, the simple way</h1>
-      <p class="sub">Paste a YouTube or Instagram link. Get direct download
-      links in seconds — the video comes straight from YouTube /
-      Instagram servers, not from our server.</p>
+      <div class="eyebrow"><span class="eyebrow-line"></span> YOUR MEDIA, YOUR WAY</div>
+      <h1>Video downloads.<br><span>Without the noise.</span></h1>
+      <p class="hero-copy">Paste a video link and get direct download options in seconds. Choose your video quality or save the audio separately.</p>
 
-      <form id="dl-form" class="dl-form">
-        <input id="url-input" type="url" inputmode="url" autocomplete="off"
-               placeholder="Paste a YouTube or Instagram link here…"
-               aria-label="Video link">
-        <button id="go-btn" type="submit">Get Download Links</button>
-      </form>
-      <div class="hint">Example: https://www.youtube.com/watch?v=… &nbsp;or&nbsp; https://www.instagram.com/reel/…</div>
-
-      <div id="status" class="status" hidden></div>
-      <div id="error" class="error" hidden></div>
-
-      <section id="result" class="result" hidden>
-        <div class="video-card">
-          <img id="thumb" class="thumb" alt="Video thumbnail" referrerpolicy="no-referrer">
-          <div class="video-meta">
-            <h2 id="v-title"></h2>
-            <div id="v-uploader" class="uploader"></div>
-            <div id="v-duration" class="duration"></div>
-            <a id="v-source" class="source" href="#" target="_blank" rel="noopener">Open original ↗</a>
+      <section class="download-panel" aria-label="Video downloader">
+        <div class="panel-label"><span class="link-icon">↗</span> VIDEO URL</div>
+        <form id="dl-form" class="dl-form" novalidate>
+          <div class="url-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13.5 14 9.5M8.2 15.8l-1.1 1.1a3.4 3.4 0 0 1-4.8-4.8l4-4a3.4 3.4 0 0 1 4.8 0M15.8 8.2l1.1-1.1a3.4 3.4 0 0 1 4.8 4.8l-4 4a3.4 3.4 0 0 1-4.8 0"/></svg>
+            <input id="url-input" type="url" inputmode="url" autocomplete="off" spellcheck="false"
+              placeholder="Paste YouTube or Instagram URL here..." aria-label="Video URL">
+            <button class="clear-btn" id="clear-btn" type="button" aria-label="Clear URL" hidden>×</button>
           </div>
+          <button id="go-btn" class="primary-btn" type="submit">
+            <span class="btn-label">Get download links</span>
+            <span class="btn-arrow">↗</span>
+          </button>
+        </form>
+        <div class="panel-foot">
+          <span><kbd>↵</kbd> Press Enter to continue</span>
+          <span class="supported"><span class="platform-dot yt"></span> YouTube <span class="platform-dot ig"></span> Instagram</span>
         </div>
-        <h3>Download links</h3>
-        <div id="formats" class="formats"></div>
-        <button id="mp3-btn" class="mp3-btn" hidden>🎵 Download MP3</button>
-        <div id="mp3-status" class="status" hidden></div>
-        <p class="tip">Tip: if a link opens the video instead of downloading,
-        right-click it and choose “Save link as…”. YouTube links marked
-        “(video only)” have no sound — download the Audio link too and
-        merge them with a video editor (or ffmpeg). Links expire after a
-        few hours — use them right away.</p>
+      </section>
+
+      <div id="status" class="notice notice-loading" role="status" aria-live="polite" hidden>
+        <span class="spinner"></span><span id="status-text">Fetching download links...</span>
+      </div>
+      <div id="error" class="notice notice-error" role="alert" hidden>
+        <span class="notice-symbol">!</span><span id="error-text"></span>
+      </div>
+
+      <section id="result" class="results" hidden>
+        <div class="section-heading">
+          <div><span class="section-kicker">READY TO DOWNLOAD</span><h2>Your download options</h2></div>
+          <span class="ready-pill"><i></i> Links ready</span>
+        </div>
+        <article class="video-card">
+          <div class="thumbnail-wrap">
+            <img id="thumb" class="thumb" alt="Video thumbnail" referrerpolicy="no-referrer">
+            <div class="thumb-placeholder" id="thumb-placeholder"><span>▶</span></div>
+          </div>
+          <div class="video-meta">
+            <div class="video-label">SOURCE VIDEO</div>
+            <h3 id="v-title">Video title</h3>
+            <div class="video-details">
+              <span id="v-uploader"></span>
+              <span id="v-duration"></span>
+            </div>
+            <a id="v-source" class="source-link" href="#" target="_blank" rel="noopener noreferrer">View original video <span>↗</span></a>
+          </div>
+        </article>
+
+        <div class="download-section">
+          <div class="download-heading"><div><span class="section-kicker">VIDEO</span><h3>Choose a quality</h3></div><span class="heading-note">Direct download links</span></div>
+          <div id="formats" class="formats"></div>
+          <div id="no-formats" class="empty-formats" hidden>No video quality links were returned for this video.</div>
+        </div>
+
+        <div id="audio-section" class="audio-section" hidden>
+          <div class="audio-copy"><span class="audio-icon">♫</span><span><b>Audio only</b><small>Separate audio stream</small></span></div>
+          <a id="audio-link" class="audio-download" href="#" target="_blank" rel="noopener noreferrer">Download audio <span>↓</span></a>
+        </div>
+
+        <div class="mp3-panel">
+          <div class="mp3-icon">♫</div>
+          <div class="mp3-copy"><b>Want just the music?</b><span>Convert the audio to an MP3 file.</span></div>
+          <button id="mp3-btn" class="mp3-btn" type="button">Download MP3 <span>↓</span></button>
+        </div>
+        <div id="mp3-status" class="mp3-status" role="status" aria-live="polite" hidden></div>
+
+        <p class="expiry-note"><span>ⓘ</span> Download links are temporary and may expire in a few hours. Use them soon after generating.</p>
       </section>
     </section>
 
-    <section class="how">
-      <h2>How it works</h2>
-      <ol>
-        <li><b>Paste</b> a YouTube or Instagram video link above.</li>
-        <li>Our small server asks yt-dlp for the video's <b>direct download links</b> (a few KB of work).</li>
-        <li>Your browser downloads the video <b>directly from YouTube / Instagram</b> at full speed. The video never passes through our server, so our connection stays free.</li>
-      </ol>
-      <p class="fine">Public videos only. Private, deleted or age-restricted
-      content may fail — there is no login support. YouTube and Instagram
-      do not officially allow downloading; use this for your own videos
-      and content you have the right to keep. Links are temporary.</p>
+    <section class="steps-section">
+      <div class="steps-intro"><span class="section-kicker">THREE SIMPLE STEPS</span><h2>How it works</h2><p>No complicated setup. Just a link and the format you need.</p></div>
+      <div class="steps-grid">
+        <article class="step-card"><span class="step-number">01</span><div class="step-icon">↗</div><h3>Paste your link</h3><p>Copy a supported YouTube or Instagram video URL and paste it above.</p></article>
+        <article class="step-card"><span class="step-number">02</span><div class="step-icon">⌁</div><h3>Choose your format</h3><p>Pick an available video quality or choose a separate audio download.</p></article>
+        <article class="step-card"><span class="step-number">03</span><div class="step-icon">↓</div><h3>Download directly</h3><p>Your selected direct link opens from the source platform. MP3 conversion is handled by the backend.</p></article>
+      </div>
+    </section>
+
+    <section class="usage-note">
+      <span class="usage-icon">ⓘ</span>
+      <p><b>Please use responsibly.</b> Only download videos you own or have permission to download. Private, deleted, restricted, or unavailable videos may not work. YouTube and Instagram may limit access to some content.</p>
     </section>
   </main>
 
   <footer class="footer">
-    Tech OTT Downloader · Made with yt-dlp · <span id="api-state"></span>
+    <a class="footer-brand" href="#"><span class="mini-mark">T</span> TECH OTT <b>DOWNLOADER</b></a>
+    <div class="footer-meta"><span id="api-state" class="backend-state"><i></i> Backend: checking...</span><span class="footer-divider"></span><span>Backend v1.1.0</span></div>
+    <p>Download only content you have the right to access and save. Links expire in a few hours.</p>
   </footer>
 
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
