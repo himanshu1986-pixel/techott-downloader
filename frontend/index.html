@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech OTT Downloader — YouTube &amp; Instagram Video Downloader</title>
+<meta name="description" content="Paste a YouTube or Instagram link and get direct download links. The video downloads straight from YouTube/Instagram servers.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">TECH OTT <span>Downloader</span></div>
+    <div class="top-note">YouTube &amp; Instagram</div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Download videos, the simple way</h1>
+      <p class="sub">Paste a YouTube or Instagram link. Get direct download
+      links in seconds — the video comes straight from YouTube /
+      Instagram servers, not from our server.</p>
+
+      <form id="dl-form" class="dl-form">
+        <input id="url-input" type="url" inputmode="url" autocomplete="off"
+               placeholder="Paste a YouTube or Instagram link here…"
+               aria-label="Video link">
+        <button id="go-btn" type="submit">Get Download Links</button>
+      </form>
+      <div class="hint">Example: https://www.youtube.com/watch?v=… &nbsp;or&nbsp; https://www.instagram.com/reel/…</div>
+
+      <div id="status" class="status" hidden></div>
+      <div id="error" class="error" hidden></div>
+
+      <section id="result" class="result" hidden>
+        <div class="video-card">
+          <img id="thumb" class="thumb" alt="Video thumbnail" referrerpolicy="no-referrer">
+          <div class="video-meta">
+            <h2 id="v-title"></h2>
+            <div id="v-uploader" class="uploader"></div>
+            <div id="v-duration" class="duration"></div>
+            <a id="v-source" class="source" href="#" target="_blank" rel="noopener">Open original ↗</a>
+          </div>
+        </div>
+        <h3>Download links</h3>
+        <div id="formats" class="formats"></div>
+        <button id="mp3-btn" class="mp3-btn" hidden>🎵 Download MP3</button>
+        <div id="mp3-status" class="status" hidden></div>
+        <p class="tip">Tip: if a link opens the video instead of downloading,
+        right-click it and choose “Save link as…”. YouTube links marked
+        “(video only)” have no sound — download the Audio link too and
+        merge them with a video editor (or ffmpeg). Links expire after a
+        few hours — use them right away.</p>
+      </section>
+    </section>
+
+    <section class="how">
+      <h2>How it works</h2>
+      <ol>
+        <li><b>Paste</b> a YouTube or Instagram video link above.</li>
+        <li>Our small server asks yt-dlp for the video's <b>direct download links</b> (a few KB of work).</li>
+        <li>Your browser downloads the video <b>directly from YouTube / Instagram</b> at full speed. The video never passes through our server, so our connection stays free.</li>
+      </ol>
+      <p class="fine">Public videos only. Private, deleted or age-restricted
+      content may fail — there is no login support. YouTube and Instagram
+      do not officially allow downloading; use this for your own videos
+      and content you have the right to keep. Links are temporary.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Tech OTT Downloader · Made with yt-dlp · <span id="api-state"></span>
+  </footer>
+
+<script src="app.js"></script>
+</body>
+</html>
