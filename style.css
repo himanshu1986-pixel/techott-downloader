@@ -1,0 +1,163 @@
+/* Tech OTT Downloader — dark theme, red accent. Original design. */
+:root {
+  --bg: #0f0f12;
+  --surface: #1a1a1f;
+  --surface2: #232329;
+  --text: #f2f2f4;
+  --muted: #a8a8b3;
+  --red: #e50914;
+  --red-dark: #b00610;
+  --green: #2fbf71;
+  --border: #2e2e36;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+a { color: #7db4ff; }
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: #000;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo { font-weight: 900; letter-spacing: 1px; font-size: 20px; }
+.logo span { color: var(--red); font-weight: 700; }
+.top-note { color: var(--muted); font-size: 13px; }
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 28px 16px 40px; }
+
+.hero h1 { font-size: 30px; margin: 8px 0 6px; line-height: 1.2; }
+.sub { color: var(--muted); margin: 0 0 20px; }
+
+.dl-form { display: flex; gap: 10px; flex-wrap: wrap; }
+.dl-form input {
+  flex: 1 1 280px;
+  padding: 14px 16px;
+  font-size: 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+}
+.dl-form input:focus { border-color: var(--red); }
+.dl-form button {
+  padding: 14px 22px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--red);
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.dl-form button:hover { background: var(--red-dark); }
+.dl-form button:disabled { opacity: .6; cursor: wait; }
+
+.hint { color: var(--muted); font-size: 13px; margin-top: 10px; word-break: break-all; }
+
+.status {
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.error {
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: #3a1114;
+  border: 1px solid #7a1d22;
+  color: #ffb3b8;
+}
+
+.result { margin-top: 22px; }
+
+.video-card {
+  display: flex;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  flex-wrap: wrap;
+}
+.thumb { width: 100%; max-width: 260px; border-radius: 8px; background: #000; }
+.video-meta { flex: 1 1 220px; min-width: 0; }
+.video-meta h2 { font-size: 18px; margin: 0 0 6px; word-break: break-word; }
+.uploader, .duration { color: var(--muted); font-size: 14px; }
+.source { display: inline-block; margin-top: 8px; font-size: 14px; }
+
+.formats { display: grid; gap: 10px; margin-top: 10px; }
+.fmt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text);
+}
+.fmt:hover { border-color: var(--red); }
+.fmt .q { font-weight: 800; font-size: 16px; }
+.fmt .meta { color: var(--muted); font-size: 13px; }
+.fmt .dl { color: var(--green); font-weight: 700; white-space: nowrap; }
+
+.mp3-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px 22px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--green);
+  color: #fff;
+  cursor: pointer;
+}
+.mp3-btn:hover { filter: brightness(1.1); }
+.mp3-btn:disabled { opacity: .6; cursor: wait; }
+
+.tip { color: var(--muted); font-size: 13px; }
+
+.how { margin-top: 36px; border-top: 1px solid var(--border); padding-top: 20px; }
+.how h2 { font-size: 20px; }
+.how ol { padding-left: 20px; }
+.how li { margin-bottom: 8px; }
+.fine { color: var(--muted); font-size: 13px; }
+
+.footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 18px 12px 26px;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 520px) {
+  .hero h1 { font-size: 24px; }
+  .dl-form button { width: 100%; }
+}
