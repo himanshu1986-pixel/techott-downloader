@@ -22,7 +22,10 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0; min-width: 320px; min-height: 100vh; color: var(--text);
-  background: radial-gradient(ellipse at 50% -20%, rgba(135,19,33,.22), transparent 48%), var(--bg);
+  background:
+    linear-gradient(rgba(9,9,11,.42), rgba(9,9,11,.42)),
+    url("bg.svg") center top / cover no-repeat fixed,
+    var(--bg);
   line-height: 1.55; overflow-x: hidden;
 }
 button, input { font: inherit; }
